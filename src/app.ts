@@ -1,3 +1,4 @@
+/* eslint-disable no-underscore-dangle */
 /* eslint-disable no-redeclare */
 
 showHello('greeting', 'TypeScript');
@@ -212,92 +213,155 @@ interface DamageLogger {
 
 // ----------------------------------------------------------------------
 
-// Task 04.01 Defining an Interface
-function printBook(book: Book): void {
-    console.log(`${book.title} by ${book.author}`);
-}
+// // Task 04.01 Defining an Interface
+// function printBook(book: Book): void {
+//     console.log(`${book.title} by ${book.author}`);
+// }
 
-const myBook: Book = {
-    id: 5,
-    title: 'Colors, Backgrounds, and Gradients',
-    author: 'Eric A. Meyer',
-    available: true,
-    category: Category.CSS,
-    // year: 2015,
-    // copies: 3
+// const myBook: Book = {
+//     id: 5,
+//     title: 'Colors, Backgrounds, and Gradients',
+//     author: 'Eric A. Meyer',
+//     available: true,
+//     category: Category.CSS,
+//     // year: 2015,
+//     // copies: 3
 
-    pages: 200,
-    // markDamaged: (reason: string) => console.log(`Damaged: ${reason}`) // as property
-    markDamaged(reason: string) { // as method
-        console.log(`Damaged: ${reason}`);
-    }
-};
+//     pages: 200,
+//     // markDamaged: (reason: string) => console.log(`Damaged: ${reason}`) // as property
+//     markDamaged(reason: string) { // as method
+//         console.log(`Damaged: ${reason}`);
+//     }
+// };
 
-printBook(myBook);
-myBook.markDamaged('Missing back cover');
-
-
-// Task 04.02 Defining an Interface for Function Types
-const logDamage: DamageLogger = (reason: string) => console.log(`Damaged: ${reason}`);
-logDamage('Missing back cover');
+// printBook(myBook);
+// myBook.markDamaged('Missing back cover');
 
 
-// Task 04.03 Extending Interface
-interface Person {
-    name: string;
-    email: string;
-}
-
-interface Author extends Person {
-    numBooksPublished: number;
-}
-
-interface Librarian extends Person {
-    department: string;
-    assistCustomer: (custName: string, bookTitle: string) => void;
-}
-
-const favoriteAuthor: Author = {
-    name: 'Anna',
-    email: 'anna@exapmle.com',
-    numBooksPublished: 2
-};
-
-const favoriteLibrarian: Librarian = {
-    name: 'Pavlo',
-    email: 'pavlo@exapmle.com',
-    department: 'Classic Literature',
-    assistCustomer: null
-};
+// // Task 04.02 Defining an Interface for Function Types
+// const logDamage: DamageLogger = (reason: string) => console.log(`Damaged: ${reason}`);
+// logDamage('Missing back cover');
 
 
-// Task 04.04 Optional Chaining
-const offer: any = {
-    book: {
-        title: 'Essential TypeScript',
-    },
-};
+// // Task 04.03 Extending Interface
+// interface Person {
+//     name: string;
+//     email: string;
+// }
 
-console.log(offer.magazine);
-console.log(offer.magazine?.getTitle());
-console.log(offer.book?.getTitle?.());
-console.log(offer.book.authors?.[0]);
+// interface Author extends Person {
+//     numBooksPublished: number;
+// }
+
+// interface Librarian extends Person {
+//     department: string;
+//     assistCustomer: (custName: string, bookTitle: string) => void;
+// }
+
+// const favoriteAuthor: Author = {
+//     name: 'Anna',
+//     email: 'anna@exapmle.com',
+//     numBooksPublished: 2
+// };
+
+// const favoriteLibrarian: Librarian = {
+//     name: 'Pavlo',
+//     email: 'pavlo@exapmle.com',
+//     department: 'Classic Literature',
+//     assistCustomer: null
+// };
 
 
-// Task 04.05 Keyof Operator
-type BookProperties = keyof Book;
+// // Task 04.04 Optional Chaining
+// const offer: any = {
+//     book: {
+//         title: 'Essential TypeScript',
+//     },
+// };
 
-function getProperty(book: Book, property: BookProperties): any {
-    const value = book[property];
+// console.log(offer.magazine);
+// console.log(offer.magazine?.getTitle());
+// console.log(offer.book?.getTitle?.());
+// console.log(offer.book.authors?.[0]);
 
-    return typeof value === 'function' ? value.name : value;
-}
 
-console.log(getProperty(myBook, 'title')); // variable from task 04.01
-console.log(getProperty(myBook, 'markDamaged'));
-console.log(getProperty(myBook, 'isbn'));
+// // Task 04.05 Keyof Operator
+// type BookProperties = keyof Book;
+
+// function getProperty(book: Book, property: BookProperties): any {
+//     const value = book[property];
+
+//     return typeof value === 'function' ? value.name : value;
+// }
+
+// console.log(getProperty(myBook, 'title')); // variable from task 04.01
+// console.log(getProperty(myBook, 'markDamaged'));
+// console.log(getProperty(myBook, 'isbn'));
 
 
 // ----------------------------------------------------------------------
 // Classes
 // Task 05.01 Creating and Using Classes
+class ReferenceItem {
+    // title: string;
+    // year: number;
+
+    // constructor(newTitle: string, newYear: number) {
+    //     console.log('Creating a new ReferenceItem...');
+    //     this.title = newTitle;
+    //     this.year = newYear;
+    // }
+
+    #id: number;
+
+    private _publisher: string;
+
+    get publisher(): string {
+        return this._publisher.toUpperCase();
+    }
+
+    set publisher(newPublisher: string) {
+        this._publisher = newPublisher;
+    }
+
+    static department: string = 'Research';
+
+    constructor(
+        id: number,
+        public title: string,
+        // private year: number
+        protected year: number
+    ) {
+        console.log('Creating a new ReferenceItem...');
+        this.#id = id;
+    }
+
+    printItem(): void {
+        console.log(`${this.title} was published in ${this.year}`);
+        console.log(ReferenceItem.department);
+        console.log(Object.getPrototypeOf(this).constructor.department); // get property by prototype
+    }
+
+    getID(): number {
+        return this.#id;
+    }
+}
+
+const ref = new ReferenceItem(1, 'Learn TypeScript', 2022);
+console.log(ref);
+ref.printItem();
+ref.publisher = 'abc-group';
+console.log(ref.publisher);
+console.log(ref.getID());
+
+
+// Task 05.02 Extending Classes (try)
+// class Encyclopedia extends ReferenceItem {
+//     edition: number;
+
+//     override printItem(): void {
+//         console.log(`Edition: edition ${this.year}`);
+//     }
+// }
+
+// const refBook = new Encyclopedia(); // add args
