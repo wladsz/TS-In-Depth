@@ -27,7 +27,16 @@ interface Book {
     category: Category;
 
     pages?: number;
+    // markDamaged?(reason: string): void;
+    // markDamaged?: (reason: string) => void;
+    markDamaged?: DamageLogger;
 };
+
+// from task 04.02:
+interface DamageLogger {
+    (reason: string): void;
+}
+
 
 function getAllBooks(): readonly Book[] {
     const books = <const> [
@@ -201,7 +210,6 @@ console.log(bookTitleTransform('Learn TypeScript'));
 console.log(bookTitleTransform(123));
 
 
-
 // ----------------------------------------------------------------------
 
 // Task 04.01 Defining an Interface
@@ -217,6 +225,18 @@ const myBook: Book = {
     category: Category.CSS,
     // year: 2015,
     // copies: 3
+
+    pages: 200,
+    // markDamaged: (reason: string) => console.log(`Damaged: ${reason}`) // as property
+    markDamaged(reason: string) { // as method
+        console.log(`Damaged: ${reason}`);
+    }
 };
 
 printBook(myBook);
+myBook.markDamaged('Missing back cover');
+
+
+// Task 04.02 Defining an Interface for Function Types
+const logDamage: DamageLogger = (reason: string) => console.log(`Damaged: ${reason}`);
+logDamage('Missing back cover');
