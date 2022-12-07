@@ -244,19 +244,19 @@ interface DamageLogger {
 
 
 // // Task 04.03 Extending Interface
-// interface Person {
-//     name: string;
-//     email: string;
-// }
+interface Person {
+    name: string;
+    email: string;
+}
 
 // interface Author extends Person {
 //     numBooksPublished: number;
 // }
 
-// interface Librarian extends Person {
-//     department: string;
-//     assistCustomer: (custName: string, bookTitle: string) => void;
-// }
+interface Librarian extends Person {
+    department: string;
+    assistCustomer: (custName: string, bookTitle: string) => void;
+}
 
 // const favoriteAuthor: Author = {
 //     name: 'Anna',
@@ -300,68 +300,107 @@ interface DamageLogger {
 
 
 // ----------------------------------------------------------------------
-// Classes
-// Task 05.01 Creating and Using Classes
-class ReferenceItem {
-    // title: string;
-    // year: number;
+// // Classes
+// // Task 05.01 Creating and Using Classes
+// abstract class ReferenceItem { // 'abstract' from task 05.03
+//     // title: string;
+//     // year: number;
 
-    // constructor(newTitle: string, newYear: number) {
-    //     console.log('Creating a new ReferenceItem...');
-    //     this.title = newTitle;
-    //     this.year = newYear;
-    // }
+//     // constructor(newTitle: string, newYear: number) {
+//     //     console.log('Creating a new ReferenceItem...');
+//     //     this.title = newTitle;
+//     //     this.year = newYear;
+//     // }
 
-    #id: number;
+//     #id: number;
 
-    private _publisher: string;
+//     private _publisher: string;
 
-    get publisher(): string {
-        return this._publisher.toUpperCase();
-    }
-
-    set publisher(newPublisher: string) {
-        this._publisher = newPublisher;
-    }
-
-    static department: string = 'Research';
-
-    constructor(
-        id: number,
-        public title: string,
-        // private year: number
-        protected year: number
-    ) {
-        console.log('Creating a new ReferenceItem...');
-        this.#id = id;
-    }
-
-    printItem(): void {
-        console.log(`${this.title} was published in ${this.year}`);
-        console.log(ReferenceItem.department);
-        console.log(Object.getPrototypeOf(this).constructor.department); // get property by prototype
-    }
-
-    getID(): number {
-        return this.#id;
-    }
-}
-
-const ref = new ReferenceItem(1, 'Learn TypeScript', 2022);
-console.log(ref);
-ref.printItem();
-ref.publisher = 'abc-group';
-console.log(ref.publisher);
-console.log(ref.getID());
-
-
-// Task 05.02 Extending Classes (try)
-// class Encyclopedia extends ReferenceItem {
-//     edition: number;
-
-//     override printItem(): void {
-//         console.log(`Edition: edition ${this.year}`);
+//     get publisher(): string {
+//         return this._publisher.toUpperCase();
 //     }
+
+//     set publisher(newPublisher: string) {
+//         this._publisher = newPublisher;
+//     }
+
+//     static department: string = 'Research';
+
+//     constructor(
+//         id: number,
+//         public title: string,
+//         // private year: number
+//         protected year: number
+//     ) {
+//         console.log('Creating a new ReferenceItem...');
+//         this.#id = id;
+//     }
+
+//     printItem(): void {
+//         console.log(`${this.title} was published in ${this.year}`);
+//         console.log(ReferenceItem.department);
+//         console.log(Object.getPrototypeOf(this).constructor.department); // get property by prototype
+//     }
+
+//     getID(): number {
+//         return this.#id;
+//     }
+
+//     abstract printCitation(): void; // from task 05.03
 // }
 
-// const refBook = new Encyclopedia(); // add args
+// const ref = new ReferenceItem(1, 'Learn TypeScript', 2022);
+// console.log(ref);
+// ref.printItem();
+// ref.publisher = 'abc-group';
+// console.log(ref.publisher);
+// console.log(ref.getID());
+
+
+// // Task 05.02 Extending Classes
+// class Encyclopedia extends ReferenceItem {
+//     constructor(
+//         id: number,
+//         title: string,
+//         year: number,
+//         public edition: number
+//     ) {
+//         super(id, title, year);
+//     }
+
+//     override printItem(): void {
+//         super.printItem();
+//         console.log(`Edition: ${this.edition} (${this.year})`);
+//     }
+
+//     printCitation(): void { // from task 05.03
+//         console.log(`${this.title} - ${this.year}`);
+//     };
+// }
+
+// const refBook: Encyclopedia = new Encyclopedia(1, 'Learn TypeScript', 2022, 2);
+// // console.log(refBook);
+// refBook.printItem();
+
+
+// // Task 05.03 Creating Abstract Classes
+// refBook.printCitation();
+
+
+// Task 05.04 Interfaces for Class Types
+class UniversityLibrarian implements Librarian {
+    name: string;
+    email: string;
+    department: string;
+
+    assistCustomer(custName: string, bookTitle: string): void {
+        console.log(`${this.name} is assisting ${custName} with book ${bookTitle}`);
+    };
+}
+
+const favoriteLibrarian: Librarian = new UniversityLibrarian();
+favoriteLibrarian.name = 'Anna';
+favoriteLibrarian.assistCustomer('Boris', 'Learn TypeScript');
+
+
+// Task 05.05 Intersection and Union Types
