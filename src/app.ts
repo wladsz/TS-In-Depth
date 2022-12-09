@@ -10,7 +10,7 @@ function showHello(divName: string, name: string) {
 
 // -----------------------------------------------------------------------
 // Task 02.01
-enum Category {JavaScript, CSS, HTML, TypeScript, Angular}
+// enum Category {JavaScript, CSS, HTML, TypeScript, Angular}
 
 // type Book = {
 //     id: number;
