@@ -142,11 +142,12 @@ interface DamageLogger {
 
 // logFirstAvailable();
 
-// // function getBookByID(id: number): Book {
-// function getBookByID(id: Book['id']): Book | undefined {
-//     const books = getAllBooks();
-//     return books.find(book => book.id === id);
-// }
+// function getBookByID(id: number): Book { // option 1
+// function getBookByID(id: Book['id']): Book | undefined { // option 2
+function getBookByID(id: Book['id']): BookOrUndefined { // option 3, from task 05.05
+    const books = getAllBooks();
+    return books.find(book => book.id === id);
+}
 
 // console.log(getBookByID(1));
 
@@ -403,4 +404,36 @@ favoriteLibrarian.name = 'Anna';
 favoriteLibrarian.assistCustomer('Boris', 'Learn TypeScript');
 
 
-// Task 05.05 Intersection and Union Types
+// Task 05.05 Intersection and Union Types (try)
+type PersonBook = Person&Book;
+
+let newVar: PersonBook = {
+    name: 'Vlad',
+    email: 'vlad@example.com',
+    id: 1,
+    title: 'Refactoring JavaScript',
+    author: 'Evan Burchard',
+    available: false,
+    category: Category.JavaScript
+};
+console.log(newVar);
+
+type BookOrUndefined = Book&undefined;
+
+interface TOptions {
+    duration?: number;
+    speed?: number;
+}
+function setDefaultConfig(options: TOptions): TOptions  {
+    if (options.duration === undefined) {
+        options.duration = 10; // let it be 10
+    } else if (options.speed === undefined) {
+        options.speed = 20; // let it be 20
+    }
+
+    return options;
+}
+
+
+// --------------------------------------------------------------------
+
