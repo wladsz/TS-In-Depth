@@ -36,4 +36,15 @@ interface TOptions {
     speed?: number;
 }
 
-export { Book, DamageLogger as Logger, Person, Author, Librarian, TOptions };
+// Task 07.02 Generic Interfaces and Classes
+interface Magazine {
+    title: string;
+    publisher: string;
+}
+
+// Task 07.03
+interface ShelfItem {
+    title: string;
+}
+
+export { Book, DamageLogger as Logger, Person, Author, Librarian, TOptions, Magazine, ShelfItem };

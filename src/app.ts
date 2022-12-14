@@ -2,8 +2,8 @@
 /* eslint-disable no-redeclare */
 
 import { Category } from './enums';
-import { Book, Logger, Author, Librarian } from './interfaces';
-import { UL, ReferenceItem, RefBook, Library } from './classes';
+import { Book, Logger, Author, Librarian, Magazine } from './interfaces';
+import { UL, ReferenceItem, RefBook, Library, Shelf } from './classes';
 import { PersonBook, BookOrUndefined, BookProperties } from './types';
 import { getAllBooks, logFirstAvailable, getBookTitlesByCategory, logBookTitles, getBookAuthorByIndex, calcTotalPages, createCustomer, createCustomerID, getBookByID, checkoutBooks, getTitles, assertStringValue, bookTitleTransform, printBook, getProperty, printRefBook, purge } from './functions';
 // import RefBook from './classes/encyclopedia';
@@ -488,7 +488,21 @@ const inventory: Book[] = [
 
 ];
 
-const result1 = purge(inventory);
-console.log(result1);
-const result2 = purge([123, 456, 789]);
-console.log(result2);
+// const result1 = purge(inventory);
+// console.log(result1);
+// const result2 = purge([123, 456, 789]);
+// console.log(result2);
+
+// Task 07.02
+const bookShelf: Shelf<Book> = new Shelf<Book>();
+inventory.forEach(book => bookShelf.add(book));
+console.log(bookShelf.getFirst().title);
+
+const magazines: Magazine[] = [
+    { title: 'Programming Language Monthly', publisher: 'Code Mags' },
+    { title: 'Literary Fiction Quarterly', publisher: 'College Press' },
+    { title: 'Five Points', publisher: 'GSU' }
+];
+const magazineShelf = new Shelf<Magazine>();
+magazines.forEach(mag => magazineShelf.add(mag));
+console.log(magazineShelf.getFirst().title);

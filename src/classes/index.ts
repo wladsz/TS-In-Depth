@@ -9,3 +9,6 @@ export * from './reader';
 
 // Task 06.06
 export type { Library } from './library';
+
+// Task 07.02
+export { default as Shelf } from './shelf';
