@@ -1,6 +1,6 @@
-/// <reference path="enums.ts" />
+// Task 06.02
 
-// import Category
+import {Category} from './enums';
 
 interface Book {
     id: number;
@@ -30,3 +30,10 @@ interface Librarian extends Person {
     department: string;
     assistCustomer: (custName: string, bookTitle: string) => void;
 }
+
+interface TOptions {
+    duration?: number;
+    speed?: number;
+}
+
+export { Book, DamageLogger as Logger, Person, Author, Librarian, TOptions };

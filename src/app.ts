@@ -1,6 +1,14 @@
 /* eslint-disable no-underscore-dangle */
 /* eslint-disable no-redeclare */
 
+import { Category } from './enums';
+import { Book, Logger, Author, Librarian } from './interfaces';
+import { UL, ReferenceItem, RefBook, Library } from './classes';
+import { PersonBook, BookOrUndefined, BookProperties } from './types';
+import { getAllBooks, logFirstAvailable, getBookTitlesByCategory, logBookTitles, getBookAuthorByIndex, calcTotalPages, createCustomer, createCustomerID, getBookByID, checkoutBooks, getTitles, assertStringValue, bookTitleTransform, printBook, getProperty, printRefBook, purge } from './functions';
+// import RefBook from './classes/encyclopedia';
+// import type { Library } from './classes/library';
+
 showHello('greeting', 'TypeScript');
 
 function showHello(divName: string, name: string) {
@@ -20,23 +28,23 @@ function showHello(divName: string, name: string) {
 //     category: Category;
 // };
 
-interface Book {
-    id: number;
-    title: string;
-    author: string;
-    available: boolean;
-    category: Category;
+// interface Book {
+//     id: number;
+//     title: string;
+//     author: string;
+//     available: boolean;
+//     category: Category;
 
-    pages?: number;
-    // markDamaged?(reason: string): void;
-    // markDamaged?: (reason: string) => void;
-    markDamaged?: DamageLogger;
-};
+//     pages?: number;
+//     // markDamaged?(reason: string): void;
+//     // markDamaged?: (reason: string) => void;
+//     markDamaged?: DamageLogger;
+// };
 
 // from task 04.02:
-interface DamageLogger {
-    (reason: string): void;
-}
+// interface DamageLogger {
+//     (reason: string): void;
+// }
 
 
 // function getAllBooks(): readonly Book[] {
@@ -144,10 +152,10 @@ interface DamageLogger {
 
 // function getBookByID(id: number): Book { // option 1
 // function getBookByID(id: Book['id']): Book | undefined { // option 2
-function getBookByID(id: Book['id']): BookOrUndefined { // option 3, from task 05.05
-    const books = getAllBooks();
-    return books.find(book => book.id === id);
-}
+// function getBookByID(id: Book['id']): BookOrUndefined { // option 3, from task 05.05
+//     const books = getAllBooks();
+//     return books.find(book => book.id === id);
+// }
 
 // console.log(getBookByID(1));
 
@@ -240,24 +248,24 @@ function getBookByID(id: Book['id']): BookOrUndefined { // option 3, from task 0
 
 
 // // Task 04.02 Defining an Interface for Function Types
-// const logDamage: DamageLogger = (reason: string) => console.log(`Damaged: ${reason}`);
+// const logDamage: Logger = (reason: string) => console.log(`Damaged: ${reason}`);
 // logDamage('Missing back cover');
 
 
 // // Task 04.03 Extending Interface
-interface Person {
-    name: string;
-    email: string;
-}
+// interface Person {
+//     name: string;
+//     email: string;
+// }
 
 // interface Author extends Person {
 //     numBooksPublished: number;
 // }
 
-interface Librarian extends Person {
-    department: string;
-    assistCustomer: (custName: string, bookTitle: string) => void;
-}
+// interface Librarian extends Person {
+//     department: string;
+//     assistCustomer: (custName: string, bookTitle: string) => void;
+// }
 
 // const favoriteAuthor: Author = {
 //     name: 'Anna',
@@ -359,28 +367,9 @@ interface Librarian extends Person {
 
 
 // // Task 05.02 Extending Classes
-// class Encyclopedia extends ReferenceItem {
-//     constructor(
-//         id: number,
-//         title: string,
-//         year: number,
-//         public edition: number
-//     ) {
-//         super(id, title, year);
-//     }
-
-//     override printItem(): void {
-//         super.printItem();
-//         console.log(`Edition: ${this.edition} (${this.year})`);
-//     }
-
-//     printCitation(): void { // from task 05.03
-//         console.log(`${this.title} - ${this.year}`);
-//     };
-// }
-
 // const refBook: Encyclopedia = new Encyclopedia(1, 'Learn TypeScript', 2022, 2);
-// // console.log(refBook);
+// const refBook: RefBook = new RefBook(1, 'Learn TypeScript', 2022, 2); // task 06.03
+// console.log(refBook);
 // refBook.printItem();
 
 
@@ -389,23 +378,23 @@ interface Librarian extends Person {
 
 
 // Task 05.04 Interfaces for Class Types
-class UniversityLibrarian implements Librarian {
-    name: string;
-    email: string;
-    department: string;
+// class UL.UniversityLibrarian implements Librarian {
+//     name: string;
+//     email: string;
+//     department: string;
 
-    assistCustomer(custName: string, bookTitle: string): void {
-        console.log(`${this.name} is assisting ${custName} with book ${bookTitle}`);
-    };
-}
+//     assistCustomer(custName: string, bookTitle: string): void {
+//         console.log(`${this.name} is assisting ${custName} with book ${bookTitle}`);
+//     };
+// }
 
-const favoriteLibrarian: Librarian = new UniversityLibrarian();
-favoriteLibrarian.name = 'Anna';
-favoriteLibrarian.assistCustomer('Boris', 'Learn TypeScript');
+// const favoriteLibrarian: Librarian = new UL.UniversityLibrarian();
+// favoriteLibrarian.name = 'Anna';
+// favoriteLibrarian.assistCustomer('Boris', 'Learn TypeScript');
 
 
-// Task 05.05 Intersection and Union Types (try)
-type PersonBook = Person&Book;
+// Task 05.05 Intersection and Union Types
+// type PersonBook = Person&Book;
 
 let newVar: PersonBook = {
     name: 'Vlad',
@@ -418,22 +407,88 @@ let newVar: PersonBook = {
 };
 console.log(newVar);
 
-type BookOrUndefined = Book&undefined;
+// type BookOrUndefined = Book&undefined;
 
-interface TOptions {
-    duration?: number;
-    speed?: number;
-}
-function setDefaultConfig(options: TOptions): TOptions  {
-    if (options.duration === undefined) {
-        options.duration = 10; // let it be 10
-    } else if (options.speed === undefined) {
-        options.speed = 20; // let it be 20
-    }
+// interface TOptions {
+//     duration?: number;
+//     speed?: number;
+// }
+// function setDefaultConfig(options: TOptions): TOptions  {
+//     // if (options.duration === undefined) {
+//     //     options.duration = 10; // let it be 10
+//     // } else if (options.speed === undefined) {
+//     //     options.speed = 20; // let it be 20
+//     // }
 
-    return options;
-}
+//     options.duration ??= 100;
+//     options.speed ??= 60;
+
+//     return options;
+// }
 
 
 // --------------------------------------------------------------------
+// Task 06.03 Default Export
+const refBook: RefBook = new RefBook(1, 'Learn TypeScript', 2022, 2);
+printRefBook(refBook);
 
+// const favoriteLibrarian: Librarian = new UL.UniversityLibrarian();
+// printRefBook(favoriteLibrarian);
+
+// // Task 06.05 Dynamic Import Expression (check)
+
+const flag = true;
+// const flag = false;
+
+// if (flag) {
+//     import ('./classes')
+//         .then(o => {
+//             const reader = new o.Reader();
+//             reader.name = 'Anna';
+//             reader.take(getAllBooks()[0]);
+
+//             console.log(reader);
+//         })
+//         .catch(err => console.log(err))
+//         .finally(() => console.log('Complete'));
+// }
+
+if (flag) {
+    const o = await import ('./classes');
+
+    const reader = new o.Reader();
+    reader.name = 'Anna';
+    reader.take(getAllBooks()[0]);
+
+    console.log(reader);
+    console.log('Complete');
+}
+
+
+// // Task 06.06 Type-Only Imports and Exports
+// let library: Library = new Library();
+let library: Library = {
+    id: 1,
+    address: '',
+    name: 'Anna'
+};
+console.log(library);
+
+// -----------------------------------------------------------------
+// // Task 07.01 Generic Functions
+const inventory: Book[] = [
+
+    { id: 10, title: 'The C Programming Language', author: '???', available: true, category: Category.Software},
+
+    { id: 11, title: 'Code Complete', author: 'Steve McConnell', available: true, category: Category.Software },
+
+    { id: 12, title: '8-Bit Graphics with Cobol', author: 'A. B.', available: true, category: Category.Software },
+
+    { id: 13, title: 'Cool autoexec.bat Scripts!', author: 'C. D.', available: true, category: Category.Software }
+
+];
+
+const result1 = purge(inventory);
+console.log(result1);
+const result2 = purge([123, 456, 789]);
+console.log(result2);

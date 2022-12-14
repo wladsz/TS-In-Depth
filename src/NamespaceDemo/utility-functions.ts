@@ -1,4 +1,4 @@
-// Task 06.01 Using Namespaces (try)
+// Task 06.01 Using Namespaces
 
 namespace Utility {
     export namespace Fees {
@@ -10,12 +10,10 @@ namespace Utility {
     }
 
     export function maxBooksAllowed(age): number {
-        if (age < 12) { // return 3 or 10 - ?
-            return 3;
-        }
+        return age < 12 ? 3 : 10;
     }
-}
 
-function privateFunc(): void {
-    console.log('This is a private function');
+    function privateFunc(): void {
+        console.log('This is a private function');
+    }
 }
