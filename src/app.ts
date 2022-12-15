@@ -5,7 +5,7 @@ import { Category } from './enums';
 import { Book, Logger, Author, Librarian, Magazine } from './interfaces';
 import { UL, ReferenceItem, RefBook, Library, Shelf } from './classes';
 import { PersonBook, BookOrUndefined, BookProperties } from './types';
-import { getAllBooks, logFirstAvailable, getBookTitlesByCategory, logBookTitles, getBookAuthorByIndex, calcTotalPages, createCustomer, createCustomerID, getBookByID, checkoutBooks, getTitles, assertStringValue, bookTitleTransform, printBook, getProperty, printRefBook, purge } from './functions';
+import { getAllBooks, logFirstAvailable, getBookTitlesByCategory, logBookTitles, getBookAuthorByIndex, calcTotalPages, createCustomer, createCustomerID, getBookByID, checkoutBooks, getTitles, assertStringValue, bookTitleTransform, printBook, getProperty, printRefBook, purge, getObjectProperty } from './functions';
 // import RefBook from './classes/encyclopedia';
 // import type { Library } from './classes/library';
 
@@ -506,3 +506,11 @@ const magazines: Magazine[] = [
 const magazineShelf = new Shelf<Magazine>();
 magazines.forEach(mag => magazineShelf.add(mag));
 console.log(magazineShelf.getFirst().title);
+
+// Task 07.03
+
+magazineShelf.printTitles();
+console.log(magazineShelf.find('Five Points'));
+
+console.log(getObjectProperty(magazines[0], 'title'));
+console.log(getObjectProperty(inventory[1], 'author'));

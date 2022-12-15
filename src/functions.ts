@@ -152,3 +152,10 @@ export function printRefBook(data: any): void {
 export function purge<T>(inventory: Array<T>): T[] {
     return inventory.slice(2);
 }
+
+// // Task 07.03 Generic Constraints
+export function getObjectProperty<TObject, TKey extends keyof TObject>(object: TObject, key: TKey): TObject[TKey] | string {
+    const value = object[key];
+
+    return typeof value === 'function' ? value.name : value;
+}
