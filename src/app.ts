@@ -4,7 +4,7 @@
 import { Category } from './enums';
 import { Book, Logger, Author, Librarian, Magazine } from './interfaces';
 import { UL, ReferenceItem, RefBook, Library, Shelf } from './classes';
-import { PersonBook, BookOrUndefined, BookProperties } from './types';
+import { PersonBook, BookOrUndefined, BookProperties, BookRequiredFields, UpdatedBook, СreateCustomerFunctionType } from './types';
 import { getAllBooks, logFirstAvailable, getBookTitlesByCategory, logBookTitles, getBookAuthorByIndex, calcTotalPages, createCustomer, createCustomerID, getBookByID, checkoutBooks, getTitles, assertStringValue, bookTitleTransform, printBook, getProperty, printRefBook, purge, getObjectProperty } from './functions';
 // import RefBook from './classes/encyclopedia';
 // import type { Library } from './classes/library';
@@ -396,16 +396,16 @@ function showHello(divName: string, name: string) {
 // Task 05.05 Intersection and Union Types
 // type PersonBook = Person&Book;
 
-let newVar: PersonBook = {
-    name: 'Vlad',
-    email: 'vlad@example.com',
-    id: 1,
-    title: 'Refactoring JavaScript',
-    author: 'Evan Burchard',
-    available: false,
-    category: Category.JavaScript
-};
-console.log(newVar);
+// let newVar: PersonBook = {
+//     name: 'Vlad',
+//     email: 'vlad@example.com',
+//     id: 1,
+//     title: 'Refactoring JavaScript',
+//     author: 'Evan Burchard',
+//     available: false,
+//     category: Category.JavaScript
+// };
+// console.log(newVar);
 
 // type BookOrUndefined = Book&undefined;
 
@@ -429,50 +429,50 @@ console.log(newVar);
 
 // --------------------------------------------------------------------
 // Task 06.03 Default Export
-const refBook: RefBook = new RefBook(1, 'Learn TypeScript', 2022, 2);
-printRefBook(refBook);
+// const refBook: RefBook = new RefBook(1, 'Learn TypeScript', 2022, 2);
+// printRefBook(refBook);
 
 // const favoriteLibrarian: Librarian = new UL.UniversityLibrarian();
 // printRefBook(favoriteLibrarian);
 
 // // Task 06.05 Dynamic Import Expression (check)
 
-const flag = true;
-// const flag = false;
+// const flag = true;
+// // const flag = false;
+
+// // if (flag) {
+// //     import ('./classes')
+// //         .then(o => {
+// //             const reader = new o.Reader();
+// //             reader.name = 'Anna';
+// //             reader.take(getAllBooks()[0]);
+
+// //             console.log(reader);
+// //         })
+// //         .catch(err => console.log(err))
+// //         .finally(() => console.log('Complete'));
+// // }
 
 // if (flag) {
-//     import ('./classes')
-//         .then(o => {
-//             const reader = new o.Reader();
-//             reader.name = 'Anna';
-//             reader.take(getAllBooks()[0]);
+//     const o = await import ('./classes');
 
-//             console.log(reader);
-//         })
-//         .catch(err => console.log(err))
-//         .finally(() => console.log('Complete'));
+//     const reader = new o.Reader();
+//     reader.name = 'Anna';
+//     reader.take(getAllBooks()[0]);
+
+//     console.log(reader);
+//     console.log('Complete');
 // }
-
-if (flag) {
-    const o = await import ('./classes');
-
-    const reader = new o.Reader();
-    reader.name = 'Anna';
-    reader.take(getAllBooks()[0]);
-
-    console.log(reader);
-    console.log('Complete');
-}
 
 
 // // Task 06.06 Type-Only Imports and Exports
 // let library: Library = new Library();
-let library: Library = {
-    id: 1,
-    address: '',
-    name: 'Anna'
-};
-console.log(library);
+// let library: Library = {
+//     id: 1,
+//     address: '',
+//     name: 'Anna'
+// };
+// console.log(library);
 
 // -----------------------------------------------------------------
 // // Task 07.01 Generic Functions
@@ -514,3 +514,24 @@ console.log(magazineShelf.find('Five Points'));
 
 console.log(getObjectProperty(magazines[0], 'title'));
 console.log(getObjectProperty(inventory[1], 'author'));
+
+// Task 07.04 Utility Types
+const bookRequiredFields: BookRequiredFields = {
+    id: 1,
+    title: 'Something about Angular',
+    author: 'Anna',
+    available: false,
+    category: Category.Angular,
+    pages: 150,
+    markDamaged: null
+};
+
+const updatedBook: UpdatedBook = {};
+
+let params: Parameters<СreateCustomerFunctionType>;
+params = ['Anna', 30, 'Kharkiv'];
+createCustomer(...params);
+console.log(createCustomer(...params));
+
+
+// Task 07.05. Mapped Types, Utility Types, Conditional Types
