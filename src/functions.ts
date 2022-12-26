@@ -46,19 +46,19 @@ export function getBookAuthorByIndex(index: number): [title: string, author: str
     return [ title, author ];
 }
 
-export function calcTotalPages(): void {
-    const data = <const> [
-        { lib: 'libName1', books: 1_000_000_000, avgPagesPerBook: 250 },
-        { lib: 'libName2', books: 5_000_000_000, avgPagesPerBook: 300 },
-        { lib: 'libName3', books: 3_000_000_000, avgPagesPerBook: 280 }
-    ];
+// export function calcTotalPages(): void {
+//     const data = <const> [
+//         { lib: 'libName1', books: 1_000_000_000, avgPagesPerBook: 250 },
+//         { lib: 'libName2', books: 5_000_000_000, avgPagesPerBook: 300 },
+//         { lib: 'libName3', books: 3_000_000_000, avgPagesPerBook: 280 }
+//     ];
 
-    const r = data.reduce((acc: BigInt, obj ) => {
-        return acc + BigInt(obj.books) * BigInt(obj.avgPagesPerBook);
-    }, 0n);
+//     const r = data.reduce((acc: BigInt, obj ) => {
+//         return acc + BigInt(obj.books) * BigInt(obj.avgPagesPerBook);
+//     }, 0n);
 
-    console.log(r);
-}
+//     console.log(r);
+// }
 
 export function createCustomerID(name: string, id: number): string {
     return `${name}-${id}`;

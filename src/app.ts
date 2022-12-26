@@ -5,7 +5,7 @@ import { Category } from './enums';
 import { Book, Logger, Author, Librarian, Magazine } from './interfaces';
 import { UL, ReferenceItem, RefBook, Library, Shelf } from './classes';
 import { PersonBook, BookOrUndefined, BookProperties, BookRequiredFields, UpdatedBook, СreateCustomerFunctionType } from './types';
-import { getAllBooks, logFirstAvailable, getBookTitlesByCategory, logBookTitles, getBookAuthorByIndex, calcTotalPages, createCustomer, createCustomerID, getBookByID, checkoutBooks, getTitles, assertStringValue, bookTitleTransform, printBook, getProperty, printRefBook, purge, getObjectProperty } from './functions';
+import { getAllBooks, logFirstAvailable, getBookTitlesByCategory, logBookTitles, getBookAuthorByIndex, /* calcTotalPages, */ createCustomer, createCustomerID, getBookByID, checkoutBooks, getTitles, assertStringValue, bookTitleTransform, printBook, getProperty, printRefBook, purge, getObjectProperty } from './functions';
 // import RefBook from './classes/encyclopedia';
 // import type { Library } from './classes/library';
 
@@ -476,62 +476,94 @@ function showHello(divName: string, name: string) {
 
 // -----------------------------------------------------------------
 // // Task 07.01 Generic Functions
-const inventory: Book[] = [
+// const inventory: Book[] = [
 
-    { id: 10, title: 'The C Programming Language', author: '???', available: true, category: Category.Software},
+//     { id: 10, title: 'The C Programming Language', author: '???', available: true, category: Category.Software},
 
-    { id: 11, title: 'Code Complete', author: 'Steve McConnell', available: true, category: Category.Software },
+//     { id: 11, title: 'Code Complete', author: 'Steve McConnell', available: true, category: Category.Software },
 
-    { id: 12, title: '8-Bit Graphics with Cobol', author: 'A. B.', available: true, category: Category.Software },
+//     { id: 12, title: '8-Bit Graphics with Cobol', author: 'A. B.', available: true, category: Category.Software },
 
-    { id: 13, title: 'Cool autoexec.bat Scripts!', author: 'C. D.', available: true, category: Category.Software }
+//     { id: 13, title: 'Cool autoexec.bat Scripts!', author: 'C. D.', available: true, category: Category.Software }
 
-];
+// ];
 
-// const result1 = purge(inventory);
-// console.log(result1);
-// const result2 = purge([123, 456, 789]);
-// console.log(result2);
+// // const result1 = purge(inventory);
+// // console.log(result1);
+// // const result2 = purge([123, 456, 789]);
+// // console.log(result2);
 
-// Task 07.02
-const bookShelf: Shelf<Book> = new Shelf<Book>();
-inventory.forEach(book => bookShelf.add(book));
-console.log(bookShelf.getFirst().title);
+// // Task 07.02
+// const bookShelf: Shelf<Book> = new Shelf<Book>();
+// inventory.forEach(book => bookShelf.add(book));
+// console.log(bookShelf.getFirst().title);
 
-const magazines: Magazine[] = [
-    { title: 'Programming Language Monthly', publisher: 'Code Mags' },
-    { title: 'Literary Fiction Quarterly', publisher: 'College Press' },
-    { title: 'Five Points', publisher: 'GSU' }
-];
-const magazineShelf = new Shelf<Magazine>();
-magazines.forEach(mag => magazineShelf.add(mag));
-console.log(magazineShelf.getFirst().title);
+// const magazines: Magazine[] = [
+//     { title: 'Programming Language Monthly', publisher: 'Code Mags' },
+//     { title: 'Literary Fiction Quarterly', publisher: 'College Press' },
+//     { title: 'Five Points', publisher: 'GSU' }
+// ];
+// const magazineShelf = new Shelf<Magazine>();
+// magazines.forEach(mag => magazineShelf.add(mag));
+// console.log(magazineShelf.getFirst().title);
 
-// Task 07.03
+// // Task 07.03
 
-magazineShelf.printTitles();
-console.log(magazineShelf.find('Five Points'));
+// magazineShelf.printTitles();
+// console.log(magazineShelf.find('Five Points'));
 
-console.log(getObjectProperty(magazines[0], 'title'));
-console.log(getObjectProperty(inventory[1], 'author'));
+// console.log(getObjectProperty(magazines[0], 'title'));
+// console.log(getObjectProperty(inventory[1], 'author'));
 
-// Task 07.04 Utility Types
-const bookRequiredFields: BookRequiredFields = {
-    id: 1,
-    title: 'Something about Angular',
-    author: 'Anna',
-    available: false,
-    category: Category.Angular,
-    pages: 150,
-    markDamaged: null
-};
+// // Task 07.04 Utility Types
+// const bookRequiredFields: BookRequiredFields = {
+//     id: 1,
+//     title: 'Something about Angular',
+//     author: 'Anna',
+//     available: false,
+//     category: Category.Angular,
+//     pages: 150,
+//     markDamaged: null
+// };
 
-const updatedBook: UpdatedBook = {};
+// const updatedBook: UpdatedBook = {};
 
-let params: Parameters<СreateCustomerFunctionType>;
-params = ['Anna', 30, 'Kharkiv'];
-createCustomer(...params);
-console.log(createCustomer(...params));
+// let params: Parameters<СreateCustomerFunctionType>;
+// params = ['Anna', 30, 'Kharkiv'];
+// createCustomer(...params);
+// console.log(createCustomer(...params));
 
 
-// Task 07.05. Mapped Types, Utility Types, Conditional Types
+// ------------------------------------------------------------------------
+// // Task 08.01. Class Decorators (sealed)
+// const favoriteLibrarian1 = new UL.UniversityLibrarian();
+// const favoriteLibrarian2 = new UL.UniversityLibrarian();
+
+// favoriteLibrarian1['a'] = 1;
+// UL.UniversityLibrarian['a'] = 2;
+// UL.UniversityLibrarian.prototype['c'] = 3;
+
+// Task 08.02 Class Decorators that replace constructor functions
+
+// console.log(favoriteLibrarian1);
+// favoriteLibrarian1.name = 'Anna';
+// favoriteLibrarian1.printLibrarian();
+// favoriteLibrarian1['printLibrarian']();
+
+// Task 08.03 Method Decorator (writable)
+// const favoriteLibrarian = new UL.UniversityLibrarian();
+// console.log(favoriteLibrarian);
+
+// favoriteLibrarian.assistFaculty = null;
+// favoriteLibrarian.teachCommunity = null;
+
+// Task 08.04 Method Decorator (timeout)
+// const refBook: RefBook = new RefBook(1, 'Learn TypeScript', 2022, 2);
+// refBook.printItem();
+
+// Task 08.05
+const favoriteLibrarian = new UL.UniversityLibrarian();
+console.log(favoriteLibrarian);
+
+favoriteLibrarian.name = 'Anna';
+favoriteLibrarian.assistCustomer('Max', 'Learn TS');

@@ -1,16 +1,18 @@
 // Task 06.04
 
+import { timeout } from '../decorators';
+
 abstract class ReferenceItem {
     #id: number;
 
-    private _publisher: string;
+    private Xpublisher: string;
 
     get publisher(): string {
-        return this._publisher.toUpperCase();
+        return this.Xpublisher.toUpperCase();
     }
 
     set publisher(newPublisher: string) {
-        this._publisher = newPublisher;
+        this.Xpublisher = newPublisher;
     }
 
     static department: string = 'Research';
@@ -24,6 +26,7 @@ abstract class ReferenceItem {
         this.#id = id;
     }
 
+    @timeout(2000) // task 08.04
     printItem(): void {
         console.log(`${this.title} was published in ${this.year}`);
         console.log(ReferenceItem.department);
