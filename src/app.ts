@@ -562,8 +562,25 @@ function showHello(divName: string, name: string) {
 // refBook.printItem();
 
 // Task 08.05
-const favoriteLibrarian = new UL.UniversityLibrarian();
-console.log(favoriteLibrarian);
+// const favoriteLibrarian = new UL.UniversityLibrarian();
+// console.log(favoriteLibrarian);
 
-favoriteLibrarian.name = 'Anna';
-favoriteLibrarian.assistCustomer('Max', 'Learn TS');
+// favoriteLibrarian.name = 'Anna';
+// favoriteLibrarian.assistCustomer('Max', 'Learn TS');
+
+// // Task 08.06 Property Decorator
+// const favoriteLibrarian = new UL.UniversityLibrarian();
+// favoriteLibrarian.name = 'Anna';
+// console.log(favoriteLibrarian.name);
+// favoriteLibrarian.assistCustomer('Max', 'Learn TS');
+// console.log(favoriteLibrarian);
+
+// Task 08.07 Accessor Decorator
+const refBook: RefBook = new RefBook(1, 'Learn TypeScript', 2022, 2);
+refBook.copies = 10;
+// refBook.copies = -10;
+// refBook.copies = 4.5;
+// refBook.copies = 0;
+console.log(refBook.copies);
+
+// --------------------------------------------------------------------------------------------------------

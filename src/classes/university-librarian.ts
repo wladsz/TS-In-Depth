@@ -1,10 +1,11 @@
 // Task 06.04
-import { sealed, logger, writable, logParameter, logMethod } from '../decorators';
+import { sealed, logger, writable, logParameter, logMethod, format } from '../decorators';
 import * as Interfaces from './../interfaces';
 
 // @sealed('UniversityLibrarian') // task 08.01
 // @logger // task 08.02
 class UniversityLibrarian implements Interfaces.Librarian {
+    @format() // task 08.06
     name: string;
     email: string;
     department: string;
