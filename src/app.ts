@@ -2,10 +2,10 @@
 /* eslint-disable no-redeclare */
 
 import { Category } from './enums';
-import { Book, Logger, Author, Librarian, Magazine } from './interfaces';
+import { Book, Logger, Author, Librarian, Magazine, LibMgrCallback, Callback } from './interfaces';
 import { UL, ReferenceItem, RefBook, Library, Shelf } from './classes';
 import { PersonBook, BookOrUndefined, BookProperties, BookRequiredFields, UpdatedBook, СreateCustomerFunctionType } from './types';
-import { getAllBooks, logFirstAvailable, getBookTitlesByCategory, logBookTitles, getBookAuthorByIndex, /* calcTotalPages, */ createCustomer, createCustomerID, getBookByID, checkoutBooks, getTitles, assertStringValue, bookTitleTransform, printBook, getProperty, printRefBook, purge, getObjectProperty } from './functions';
+import { getAllBooks, logFirstAvailable, getBookTitlesByCategory, logBookTitles, getBookAuthorByIndex, /* calcTotalPages, */ createCustomer, createCustomerID, getBookByID, checkoutBooks, getTitles, assertStringValue, bookTitleTransform, printBook, getProperty, printRefBook, purge, getObjectProperty, getBooksByCategory, logCategorySearch, getBooksByCategoryPromise, logSearchResults } from './functions';
 // import RefBook from './classes/encyclopedia';
 // import type { Library } from './classes/library';
 
@@ -550,18 +550,18 @@ function showHello(divName: string, name: string) {
 // favoriteLibrarian1.printLibrarian();
 // favoriteLibrarian1['printLibrarian']();
 
-// Task 08.03 Method Decorator (writable)
+// // Task 08.03 Method Decorator (writable)
 // const favoriteLibrarian = new UL.UniversityLibrarian();
 // console.log(favoriteLibrarian);
 
 // favoriteLibrarian.assistFaculty = null;
 // favoriteLibrarian.teachCommunity = null;
 
-// Task 08.04 Method Decorator (timeout)
+// // Task 08.04 Method Decorator (timeout)
 // const refBook: RefBook = new RefBook(1, 'Learn TypeScript', 2022, 2);
 // refBook.printItem();
 
-// Task 08.05
+// // Task 08.05
 // const favoriteLibrarian = new UL.UniversityLibrarian();
 // console.log(favoriteLibrarian);
 
@@ -575,12 +575,37 @@ function showHello(divName: string, name: string) {
 // favoriteLibrarian.assistCustomer('Max', 'Learn TS');
 // console.log(favoriteLibrarian);
 
-// Task 08.07 Accessor Decorator
-const refBook: RefBook = new RefBook(1, 'Learn TypeScript', 2022, 2);
-refBook.copies = 10;
-// refBook.copies = -10;
-// refBook.copies = 4.5;
-// refBook.copies = 0;
-console.log(refBook.copies);
+// // Task 08.07 Accessor Decorator
+// const refBook: RefBook = new RefBook(1, 'Learn TypeScript', 2022, 2);
+// refBook.copies = 10;
+// // refBook.copies = -10;
+// // refBook.copies = 4.5;
+// // refBook.copies = 0;
+// console.log(refBook.copies);
 
 // --------------------------------------------------------------------------------------------------------
+// // Task 09.01 Callback Functions
+// console.log('Begin');
+// getBooksByCategory(Category.JavaScript, logCategorySearch);
+// getBooksByCategory(Category.Software, logCategorySearch);
+// console.log('End');
+
+// // Task 09.02 Promises
+// console.log('Begin');
+// getBooksByCategoryPromise(Category.JavaScript)
+//     .then(titles => {
+//         console.log(titles);
+//         return Promise.resolve(titles.length);
+//     })
+//     .then(n => console.log(n))
+//     .catch(reason => console.log(reason));
+// getBooksByCategoryPromise(Category.Software)
+//     .then(titles => console.log(titles))
+//     .catch(reason => console.log(reason));
+// console.log('End');
+
+// Task 09.03 Async Functions
+console.log('Begin');
+logSearchResults(Category.JavaScript);
+logSearchResults(Category.Software).catch(err => console.log(err));
+console.log('End');

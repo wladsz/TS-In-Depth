@@ -1,6 +1,6 @@
 /* eslint-disable no-redeclare */
 // Task 06.02
-import { Book, TOptions} from './interfaces';
+import { Book, TOptions, LibMgrCallback, Callback } from './interfaces';
 import { Category } from './enums';
 import { BookProperties, BookOrUndefined } from './types';
 import RefBook from './classes/encyclopedia';
@@ -153,9 +153,56 @@ export function purge<T>(inventory: Array<T>): T[] {
     return inventory.slice(2);
 }
 
-// // Task 07.03 Generic Constraints
+// Task 07.03 Generic Constraints
 export function getObjectProperty<TObject, TKey extends keyof TObject>(object: TObject, key: TKey): TObject[TKey] | string {
     const value = object[key];
 
     return typeof value === 'function' ? value.name : value;
+}
+
+// Task 09.01
+// export function getBooksByCategory(category: Category, callback: LibMgrCallback): void { // or
+export function getBooksByCategory(category: Category, callback: Callback<string[]>): void {
+    setTimeout(function() {
+        try {
+            const titles = getBookTitlesByCategory(category);
+
+            if (titles.length > 0) {
+                callback(null, titles);
+            } else {
+                throw new Error('No books found.');
+            }
+        } catch (error) {
+            callback(error, null);
+        }
+    }, 2000);
+}
+
+export function logCategorySearch(err: Error | null, titles: string[] | null): void {
+    if (err) {
+        console.log(err.message);
+    } else{
+        console.log(titles);
+    }
+}
+
+export function getBooksByCategoryPromise(category: Category): Promise<string[]> {
+    return new Promise((resolve, reject) => {
+        setTimeout(function() {
+            const titles = getBookTitlesByCategory(category);
+
+            if (titles.length > 0) {
+                resolve(titles);
+            } else {
+                reject('No books found.');
+            }
+        }, 2000);
+    });
+}
+
+// Task 09.03 Async Functions
+export async function logSearchResults(category: Category) {
+    const titles = await getBooksByCategoryPromise(category);
+    console.log(titles.length);
+    return titles;
 }

@@ -1,5 +1,5 @@
 // Task 06.02
-import { createCustomer } from './functions';
+import { createCustomer, getBooksByCategoryPromise } from './functions';
 import { Book, Person, Author } from './interfaces';
 
 type PersonBook = Person&Book;
@@ -42,4 +42,9 @@ type RemoveProps <T extends object, TProps extends keyof T> = {
 type BookRequiredPropsType = RemoveProps<Book, BookOptionalProps>;
 type BookOptionalPropsType = RemoveProps<Book, BookRequiredProps>;
 
-export { PersonBook, BookProperties, BookOrUndefined, BookRequiredFields, UpdatedBook, СreateCustomerFunctionType, fn, P1, P2, P3, RequiredProps, OptionalProps};
+type Unpromisify<T> = T extends Promise<infer R> ? R : never;
+type Unarray<T> = T extends Array<infer R> ? R : never; // optional
+
+type pr = Unarray<Unpromisify<ReturnType<typeof getBooksByCategoryPromise>>>;
+
+export { PersonBook, BookProperties, BookOrUndefined, BookRequiredFields, UpdatedBook, СreateCustomerFunctionType, fn, P1, P2, P3, RequiredProps, OptionalProps, Unpromisify};
