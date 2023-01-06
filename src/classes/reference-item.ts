@@ -26,7 +26,7 @@ abstract class ReferenceItem {
         this.#id = id;
     }
 
-    @timeout(2000) // task 08.04
+    @timeout(2000) // -- task 08.04
     printItem(): void {
         console.log(`${this.title} was published in ${this.year}`);
         console.log(ReferenceItem.department);

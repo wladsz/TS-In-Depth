@@ -1,5 +1,4 @@
 // Task 06.02
-
 import {Category} from './enums';
 
 interface Book {

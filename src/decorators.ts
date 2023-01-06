@@ -1,5 +1,4 @@
 // Task 08.01 Class Decorators
-
 export function sealed(param: string) /* :(constructor: Function) => void */ { // full syntax
     return function(constructor: Function): void {
         console.log(`Sealing the constructor ${param}`);
@@ -28,7 +27,6 @@ export function logger<TFunction extends Function>(constructor: TFunction): TFun
 }
 
 // Task 08.03
-
 export function writable(isWritable: boolean) {
     return function (target: any, methodName: string, descriptor: PropertyDescriptor) {
         console.log(target);
@@ -49,7 +47,7 @@ export function timeout (ms: number) {
         descriptor.value = function(...args: any) {
             if (window.confirm('Are you sure?')) {
                 setTimeout(() => {
-                    originalMethod.apply(this, args);
+                    originalMethod.apply(this, args.toString());
                 }, ms);
             }
         };

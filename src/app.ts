@@ -5,7 +5,7 @@ import { Category } from './enums';
 import { Book, Logger, Author, Librarian, Magazine, LibMgrCallback, Callback } from './interfaces';
 import { UL, ReferenceItem, RefBook, Library, Shelf } from './classes';
 import { PersonBook, BookOrUndefined, BookProperties, BookRequiredFields, UpdatedBook, СreateCustomerFunctionType } from './types';
-import { getAllBooks, logFirstAvailable, getBookTitlesByCategory, logBookTitles, getBookAuthorByIndex, /* calcTotalPages, */ createCustomer, createCustomerID, getBookByID, checkoutBooks, getTitles, assertStringValue, bookTitleTransform, printBook, getProperty, printRefBook, purge, getObjectProperty, getBooksByCategory, logCategorySearch, getBooksByCategoryPromise, logSearchResults } from './functions';
+import { getAllBooks, logFirstAvailable, getBookTitlesByCategory, logBookTitles, getBookAuthorByIndex, calcTotalPages, createCustomer, createCustomerID, getBookByID, checkoutBooks, getTitles, assertStringValue, bookTitleTransform, printBook, getProperty, printRefBook, purge, getObjectProperty, getBooksByCategory, logCategorySearch, getBooksByCategoryPromise, logSearchResults } from './functions';
 // import RefBook from './classes/encyclopedia';
 // import type { Library } from './classes/library';
 
@@ -16,8 +16,8 @@ function showHello(divName: string, name: string) {
     elt.innerText = `Hello from ${name}`;
 }
 
-// -----------------------------------------------------------------------
-// Task 02.01
+// // -----------------------------------------------------------------------
+// // Task 02.01
 // enum Category {JavaScript, CSS, HTML, TypeScript, Angular}
 
 // type Book = {
@@ -41,7 +41,7 @@ function showHello(divName: string, name: string) {
 //     markDamaged?: DamageLogger;
 // };
 
-// from task 04.02:
+// // -- from task 04.02:
 // interface DamageLogger {
 //     (reason: string): void;
 // }
@@ -69,7 +69,6 @@ function showHello(divName: string, name: string) {
 // }
 
 // logFirstAvailable(getAllBooks());
-
 
 
 // function getBookTitlesByCategory(inputCategory: Category = Category.JavaScript): string[] {
@@ -210,7 +209,6 @@ function showHello(divName: string, name: string) {
 //     }
 // }
 
-
 // function bookTitleTransform(title: any): string {
 //     assertStringValue(title);
 //     return [...title].reverse().join('');
@@ -220,36 +218,36 @@ function showHello(divName: string, name: string) {
 // console.log(bookTitleTransform(123));
 
 
-// ----------------------------------------------------------------------
+// // ----------------------------------------------------------------------
 
 // // Task 04.01 Defining an Interface
 // function printBook(book: Book): void {
 //     console.log(`${book.title} by ${book.author}`);
 // }
 
-// const myBook: Book = {
-//     id: 5,
-//     title: 'Colors, Backgrounds, and Gradients',
-//     author: 'Eric A. Meyer',
-//     available: true,
-//     category: Category.CSS,
-//     // year: 2015,
-//     // copies: 3
+const myBook: Book = {
+    id: 5,
+    title: 'Colors, Backgrounds, and Gradients',
+    author: 'Eric A. Meyer',
+    available: true,
+    category: Category.CSS,
+    // year: 2015,
+    // copies: 3
 
-//     pages: 200,
-//     // markDamaged: (reason: string) => console.log(`Damaged: ${reason}`) // as property
-//     markDamaged(reason: string) { // as method
-//         console.log(`Damaged: ${reason}`);
-//     }
-// };
+    pages: 200,
+    // markDamaged: (reason: string) => console.log(`Damaged: ${reason}`) // as property
+    markDamaged(reason: string) { // as method
+        console.log(`Damaged: ${reason}`);
+    }
+};
 
-// printBook(myBook);
-// myBook.markDamaged('Missing back cover');
+printBook(myBook);
+myBook.markDamaged('Missing back cover');
 
 
 // // Task 04.02 Defining an Interface for Function Types
-// const logDamage: Logger = (reason: string) => console.log(`Damaged: ${reason}`);
-// logDamage('Missing back cover');
+const logDamage: Logger = (reason: string) => console.log(`Damaged: ${reason}`);
+logDamage('Missing back cover');
 
 
 // // Task 04.03 Extending Interface
@@ -267,11 +265,11 @@ function showHello(divName: string, name: string) {
 //     assistCustomer: (custName: string, bookTitle: string) => void;
 // }
 
-// const favoriteAuthor: Author = {
-//     name: 'Anna',
-//     email: 'anna@exapmle.com',
-//     numBooksPublished: 2
-// };
+const favoriteAuthor: Author = {
+    name: 'Anna',
+    email: 'anna@exapmle.com',
+    numBooksPublished: 2
+};
 
 // const favoriteLibrarian: Librarian = {
 //     name: 'Pavlo',
@@ -282,16 +280,16 @@ function showHello(divName: string, name: string) {
 
 
 // // Task 04.04 Optional Chaining
-// const offer: any = {
-//     book: {
-//         title: 'Essential TypeScript',
-//     },
-// };
+const offer: any = {
+    book: {
+        title: 'Essential TypeScript',
+    },
+};
 
-// console.log(offer.magazine);
-// console.log(offer.magazine?.getTitle());
-// console.log(offer.book?.getTitle?.());
-// console.log(offer.book.authors?.[0]);
+console.log(offer.magazine);
+console.log(offer.magazine?.getTitle());
+console.log(offer.book?.getTitle?.());
+console.log(offer.book.authors?.[0]);
 
 
 // // Task 04.05 Keyof Operator
@@ -303,13 +301,14 @@ function showHello(divName: string, name: string) {
 //     return typeof value === 'function' ? value.name : value;
 // }
 
-// console.log(getProperty(myBook, 'title')); // variable from task 04.01
-// console.log(getProperty(myBook, 'markDamaged'));
-// console.log(getProperty(myBook, 'isbn'));
+console.log(getProperty(myBook, 'title')); // variable from task 04.01
+console.log(getProperty(myBook, 'markDamaged'));
+// console.log(getProperty(myBook, 'isbn')); // not assignable
 
 
-// ----------------------------------------------------------------------
+// // ----------------------------------------------------------------------
 // // Classes
+
 // // Task 05.01 Creating and Using Classes
 // abstract class ReferenceItem { // 'abstract' from task 05.03
 //     // title: string;
@@ -377,7 +376,7 @@ function showHello(divName: string, name: string) {
 // refBook.printCitation();
 
 
-// Task 05.04 Interfaces for Class Types
+// // Task 05.04 Interfaces for Class Types
 // class UL.UniversityLibrarian implements Librarian {
 //     name: string;
 //     email: string;
@@ -393,148 +392,154 @@ function showHello(divName: string, name: string) {
 // favoriteLibrarian.assistCustomer('Boris', 'Learn TypeScript');
 
 
-// Task 05.05 Intersection and Union Types
+// // Task 05.05 Intersection and Union Types
 // type PersonBook = Person&Book;
 
-// let newVar: PersonBook = {
-//     name: 'Vlad',
-//     email: 'vlad@example.com',
-//     id: 1,
-//     title: 'Refactoring JavaScript',
-//     author: 'Evan Burchard',
-//     available: false,
-//     category: Category.JavaScript
-// };
-// console.log(newVar);
+let newVar: PersonBook = {
+    name: 'Vlad',
+    email: 'vlad@example.com',
+    id: 1,
+    title: 'Refactoring JavaScript',
+    author: 'Evan Burchard',
+    available: false,
+    category: Category.JavaScript
+};
+console.log(newVar);
 
 // type BookOrUndefined = Book&undefined;
 
-// interface TOptions {
-//     duration?: number;
-//     speed?: number;
-// }
-// function setDefaultConfig(options: TOptions): TOptions  {
-//     // if (options.duration === undefined) {
-//     //     options.duration = 10; // let it be 10
-//     // } else if (options.speed === undefined) {
-//     //     options.speed = 20; // let it be 20
-//     // }
+interface TOptions {
+    duration?: number;
+    speed?: number;
+}
+function setDefaultConfig(options: TOptions): TOptions  {
+    // if (options.duration === undefined) {
+    //     options.duration = 10; // let it be 10
+    // } else if (options.speed === undefined) {
+    //     options.speed = 20; // let it be 20
+    // }
 
-//     options.duration ??= 100;
-//     options.speed ??= 60;
+    options.duration ??= 100;
+    options.speed ??= 60;
 
-//     return options;
-// }
+    return options;
+}
 
 
-// --------------------------------------------------------------------
-// Task 06.03 Default Export
+// // --------------------------------------------------------------------
+
+// // Task 06.03 Default Export
 // const refBook: RefBook = new RefBook(1, 'Learn TypeScript', 2022, 2);
 // printRefBook(refBook);
 
 // const favoriteLibrarian: Librarian = new UL.UniversityLibrarian();
 // printRefBook(favoriteLibrarian);
 
-// // Task 06.05 Dynamic Import Expression (check)
 
-// const flag = true;
-// // const flag = false;
-
-// // if (flag) {
-// //     import ('./classes')
-// //         .then(o => {
-// //             const reader = new o.Reader();
-// //             reader.name = 'Anna';
-// //             reader.take(getAllBooks()[0]);
-
-// //             console.log(reader);
-// //         })
-// //         .catch(err => console.log(err))
-// //         .finally(() => console.log('Complete'));
-// // }
+// // Task 06.05 Dynamic Import Expression
+const flag = true;
+// const flag = false;
 
 // if (flag) {
-//     const o = await import ('./classes');
+//     import ('./classes')
+//         .then(o => {
+//             const reader = new o.Reader();
+//             reader.name = 'Anna';
+//             reader.take(getAllBooks()[0]);
 
-//     const reader = new o.Reader();
-//     reader.name = 'Anna';
-//     reader.take(getAllBooks()[0]);
-
-//     console.log(reader);
-//     console.log('Complete');
+//             console.log(reader);
+//         })
+//         .catch(err => console.log(err))
+//         .finally(() => console.log('Complete'));
 // }
+
+if (flag) {
+    const o = await import ('./classes');
+
+    const reader = new o.Reader();
+    reader.name = 'Anna';
+    reader.take(getAllBooks()[0]);
+
+    console.log(reader);
+    console.log('Complete');
+}
 
 
 // // Task 06.06 Type-Only Imports and Exports
 // let library: Library = new Library();
-// let library: Library = {
-//     id: 1,
-//     address: '',
-//     name: 'Anna'
-// };
-// console.log(library);
+let library: Library = {
+    id: 1,
+    address: '',
+    name: 'Anna'
+};
+console.log(library);
 
-// -----------------------------------------------------------------
+
+// // -----------------------------------------------------------------
+
 // // Task 07.01 Generic Functions
-// const inventory: Book[] = [
+const inventory: Book[] = [
 
-//     { id: 10, title: 'The C Programming Language', author: '???', available: true, category: Category.Software},
+    { id: 10, title: 'The C Programming Language', author: '???', available: true, category: Category.Software},
 
-//     { id: 11, title: 'Code Complete', author: 'Steve McConnell', available: true, category: Category.Software },
+    { id: 11, title: 'Code Complete', author: 'Steve McConnell', available: true, category: Category.Software },
 
-//     { id: 12, title: '8-Bit Graphics with Cobol', author: 'A. B.', available: true, category: Category.Software },
+    { id: 12, title: '8-Bit Graphics with Cobol', author: 'A. B.', available: true, category: Category.Software },
 
-//     { id: 13, title: 'Cool autoexec.bat Scripts!', author: 'C. D.', available: true, category: Category.Software }
+    { id: 13, title: 'Cool autoexec.bat Scripts!', author: 'C. D.', available: true, category: Category.Software }
 
-// ];
+];
 
 // // const result1 = purge(inventory);
 // // console.log(result1);
 // // const result2 = purge([123, 456, 789]);
 // // console.log(result2);
 
-// // Task 07.02
-// const bookShelf: Shelf<Book> = new Shelf<Book>();
-// inventory.forEach(book => bookShelf.add(book));
-// console.log(bookShelf.getFirst().title);
 
-// const magazines: Magazine[] = [
-//     { title: 'Programming Language Monthly', publisher: 'Code Mags' },
-//     { title: 'Literary Fiction Quarterly', publisher: 'College Press' },
-//     { title: 'Five Points', publisher: 'GSU' }
-// ];
-// const magazineShelf = new Shelf<Magazine>();
-// magazines.forEach(mag => magazineShelf.add(mag));
-// console.log(magazineShelf.getFirst().title);
+// // Task 07.02
+const bookShelf: Shelf<Book> = new Shelf<Book>();
+inventory.forEach(book => bookShelf.add(book));
+console.log(bookShelf.getFirst().title);
+
+const magazines: Magazine[] = [
+    { title: 'Programming Language Monthly', publisher: 'Code Mags' },
+    { title: 'Literary Fiction Quarterly', publisher: 'College Press' },
+    { title: 'Five Points', publisher: 'GSU' }
+];
+const magazineShelf = new Shelf<Magazine>();
+magazines.forEach(mag => magazineShelf.add(mag));
+console.log(magazineShelf.getFirst().title);
+
 
 // // Task 07.03
+magazineShelf.printTitles();
+console.log(magazineShelf.find('Five Points'));
 
-// magazineShelf.printTitles();
-// console.log(magazineShelf.find('Five Points'));
+console.log(getObjectProperty(magazines[0], 'title'));
+console.log(getObjectProperty(inventory[1], 'author'));
 
-// console.log(getObjectProperty(magazines[0], 'title'));
-// console.log(getObjectProperty(inventory[1], 'author'));
 
 // // Task 07.04 Utility Types
-// const bookRequiredFields: BookRequiredFields = {
-//     id: 1,
-//     title: 'Something about Angular',
-//     author: 'Anna',
-//     available: false,
-//     category: Category.Angular,
-//     pages: 150,
-//     markDamaged: null
-// };
+const bookRequiredFields: BookRequiredFields = {
+    id: 1,
+    title: 'Something about Angular',
+    author: 'Anna',
+    available: false,
+    category: Category.Angular,
+    pages: 150,
+    markDamaged: null
+};
 
-// const updatedBook: UpdatedBook = {};
+const updatedBook: UpdatedBook = {};
 
-// let params: Parameters<СreateCustomerFunctionType>;
-// params = ['Anna', 30, 'Kharkiv'];
-// createCustomer(...params);
-// console.log(createCustomer(...params));
+let params: Parameters<СreateCustomerFunctionType>;
+params = ['Anna', 30, 'Kharkiv'];
+createCustomer(...params);
+console.log(createCustomer(...params));
 
 
-// ------------------------------------------------------------------------
+// // ------------------------------------------------------------------------
+
 // // Task 08.01. Class Decorators (sealed)
 // const favoriteLibrarian1 = new UL.UniversityLibrarian();
 // const favoriteLibrarian2 = new UL.UniversityLibrarian();
@@ -543,12 +548,14 @@ function showHello(divName: string, name: string) {
 // UL.UniversityLibrarian['a'] = 2;
 // UL.UniversityLibrarian.prototype['c'] = 3;
 
-// Task 08.02 Class Decorators that replace constructor functions
+
+// // Task 08.02 Class Decorators that replace constructor functions
 
 // console.log(favoriteLibrarian1);
 // favoriteLibrarian1.name = 'Anna';
 // favoriteLibrarian1.printLibrarian();
 // favoriteLibrarian1['printLibrarian']();
+
 
 // // Task 08.03 Method Decorator (writable)
 // const favoriteLibrarian = new UL.UniversityLibrarian();
@@ -557,9 +564,11 @@ function showHello(divName: string, name: string) {
 // favoriteLibrarian.assistFaculty = null;
 // favoriteLibrarian.teachCommunity = null;
 
+
 // // Task 08.04 Method Decorator (timeout)
 // const refBook: RefBook = new RefBook(1, 'Learn TypeScript', 2022, 2);
 // refBook.printItem();
+
 
 // // Task 08.05
 // const favoriteLibrarian = new UL.UniversityLibrarian();
@@ -568,41 +577,45 @@ function showHello(divName: string, name: string) {
 // favoriteLibrarian.name = 'Anna';
 // favoriteLibrarian.assistCustomer('Max', 'Learn TS');
 
+
 // // Task 08.06 Property Decorator
-// const favoriteLibrarian = new UL.UniversityLibrarian();
-// favoriteLibrarian.name = 'Anna';
-// console.log(favoriteLibrarian.name);
-// favoriteLibrarian.assistCustomer('Max', 'Learn TS');
-// console.log(favoriteLibrarian);
+const favoriteLibrarian = new UL.UniversityLibrarian();
+favoriteLibrarian.name = 'Anna';
+console.log(favoriteLibrarian.name);
+favoriteLibrarian.assistCustomer('Max', 'Learn TS');
+console.log(favoriteLibrarian);
+
 
 // // Task 08.07 Accessor Decorator
-// const refBook: RefBook = new RefBook(1, 'Learn TypeScript', 2022, 2);
-// refBook.copies = 10;
-// // refBook.copies = -10;
-// // refBook.copies = 4.5;
-// // refBook.copies = 0;
-// console.log(refBook.copies);
+const refBook: RefBook = new RefBook(1, 'Learn TypeScript', 2022, 2);
+refBook.copies = 10;
+// refBook.copies = -10;
+// refBook.copies = 4.5;
+// refBook.copies = 0;
+console.log(refBook.copies);
 
-// --------------------------------------------------------------------------------------------------------
+
+// // --------------------------------------------------------------------------------------------------------
 // // Task 09.01 Callback Functions
-// console.log('Begin');
-// getBooksByCategory(Category.JavaScript, logCategorySearch);
-// getBooksByCategory(Category.Software, logCategorySearch);
-// console.log('End');
+console.log('Begin');
+getBooksByCategory(Category.JavaScript, logCategorySearch);
+getBooksByCategory(Category.Software, logCategorySearch);
+console.log('End');
 
 // // Task 09.02 Promises
-// console.log('Begin');
-// getBooksByCategoryPromise(Category.JavaScript)
-//     .then(titles => {
-//         console.log(titles);
-//         return Promise.resolve(titles.length);
-//     })
-//     .then(n => console.log(n))
-//     .catch(reason => console.log(reason));
-// getBooksByCategoryPromise(Category.Software)
-//     .then(titles => console.log(titles))
-//     .catch(reason => console.log(reason));
-// console.log('End');
+console.log('Begin');
+getBooksByCategoryPromise(Category.JavaScript)
+    .then(titles => {
+        console.log(titles);
+        return Promise.resolve(titles.length);
+    })
+    .then(n => console.log(n))
+    .catch(reason => console.log(reason));
+getBooksByCategoryPromise(Category.Software)
+    .then(titles => console.log(titles))
+    .catch(reason => console.log(reason));
+console.log('End');
+
 
 // Task 09.03 Async Functions
 console.log('Begin');

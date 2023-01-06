@@ -4,9 +4,9 @@ import { ReferenceItem } from './reference-item';
 import { positiveInteger } from '../decorators';
 
 export default class Encyclopedia extends ReferenceItem { // default export
-    private _copies: number; // task 08.07
+    private _copies: number; // -- task 08.07
 
-    @positiveInteger // task 08.07
+    @positiveInteger // -- task 08.07
     get copies(): number {
         return this._copies;
     }

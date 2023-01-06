@@ -3,17 +3,16 @@ import { createCustomer, getBooksByCategoryPromise } from './functions';
 import { Book, Person, Author } from './interfaces';
 
 type PersonBook = Person&Book;
-
 type BookProperties = keyof Book;
-
 type BookOrUndefined = Book&undefined;
 
-// Task 07.04
 
+// Task 07.04
 type BookRequiredFields = Required<Book>;
 type UpdatedBook = Partial<Book>;
 type AuthorWoEmail = Omit<Author, 'email'>;
 type СreateCustomerFunctionType = typeof createCustomer;
+
 
 // Task 07.05
 type fn = (a: string, b: number, c: boolean) => symbol;
